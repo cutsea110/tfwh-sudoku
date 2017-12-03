@@ -10,7 +10,7 @@ digits :: [Digit]
 digits = ['1'..'9']
 
 blank :: Digit -> Bool
-blank = (=='0')
+blank = (=='.')
 
 solve :: Grid -> [Grid]
 solve = filter valid . expand . many prune . choices
@@ -80,13 +80,16 @@ remove ds [x] = [x]
 remove ds xs  = filter (`notElem` ds) xs
 
 example :: Grid
-example = [ "004005700"
-          , "000009400"
-          , "360000008"
-          , "720060000"
-          , "000402000"
-          , "000080093"
-          , "400000056"
-          , "005300000"
-          , "006100900"
+example = [ "..4..57.."
+          , ".....94.."
+          , "36......8"
+          , "72..6...."
+          , "...4.2..."
+          , "....8..93"
+          , "4......56"
+          , "..53....."
+          , "..61..9.."
           ]
+
+main :: IO ()
+main = mapM_ putStrLn $ head $ solve example
