@@ -46,7 +46,8 @@ expand1 rows
     (row1, cs : row2)    = break smallest row
     smallest cs = length cs == n
     n           = minimum (counts rows)
-    counts = filter (/= 1) . map length . concat
+
+counts = filter (/= 1) . map length . concat
 
 complete :: Matrix Choices -> Bool
 complete = all (all single)
@@ -54,6 +55,11 @@ complete = all (all single)
 single :: [a] -> Bool
 single [_] = True
 single _   = False
+
+safe :: Matrix Choices -> Bool
+safe cm = all ok (rows cm) && all ok (cols cm) && all ok (boxs cm)
+
+ok row = nodups [x | [x] <- row]
 
 nodups :: (Eq a) => [a] -> Bool
 nodups [] = True
