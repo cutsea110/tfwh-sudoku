@@ -38,6 +38,16 @@ cp (xs : xss) = [x : ys | x <- xs, ys <- yss]
 expand :: Matrix Choices -> [Grid]
 expand = cp . map cp
 
+expand1 :: Matrix Choices -> [Matrix Choices]
+expand1 rows
+  = [rows1 ++ [row1 ++ [c] : row2] ++ rows2 | c <- cs]
+  where
+    (rows1, row : rows2) = break (any smallest) rows
+    (row1, cs : row2)    = break smallest row
+    smallest cs = length cs == n
+    n           = minimum (counts rows)
+    counts = filter (/= 1) . map length . concat
+
 nodups :: (Eq a) => [a] -> Bool
 nodups [] = True
 nodups (x : xs) = all (/= x) xs && nodups xs
