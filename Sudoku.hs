@@ -13,7 +13,9 @@ blank :: Digit -> Bool
 blank = (=='.')
 
 solve :: Grid -> [Grid]
-solve = filter valid . expand . many prune . choices
+solve = search . choices
+
+search = concat . map search . expand1 . prune
 
 completions :: Grid -> [Grid]
 completions = expand . choices
