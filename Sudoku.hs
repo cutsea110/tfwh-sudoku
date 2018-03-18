@@ -15,7 +15,11 @@ blank = (=='.')
 solve :: Grid -> [Grid]
 solve = search . choices
 
-search = concat . map search . expand1 . prune
+search cm
+  | not (safe pm) = []
+  | complete pm   = [extract pm]
+  | otherwise     = concat (map search (expand1 pm))
+  where pm = prune cm
 
 completions :: Grid -> [Grid]
 completions = expand . choices
