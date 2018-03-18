@@ -61,6 +61,9 @@ safe cm = all ok (rows cm) && all ok (cols cm) && all ok (boxs cm)
 
 ok row = nodups [x | [x] <- row]
 
+extract :: Matrix Choices -> Grid
+extract = map (map head)
+
 nodups :: (Eq a) => [a] -> Bool
 nodups [] = True
 nodups (x : xs) = all (/= x) xs && nodups xs
