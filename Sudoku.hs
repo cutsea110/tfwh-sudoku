@@ -48,6 +48,13 @@ expand1 rows
     n           = minimum (counts rows)
     counts = filter (/= 1) . map length . concat
 
+complete :: Matrix Choices -> Bool
+complete = all (all single)
+
+single :: [a] -> Bool
+single [_] = True
+single _   = False
+
 nodups :: (Eq a) => [a] -> Bool
 nodups [] = True
 nodups (x : xs) = all (/= x) xs && nodups xs
