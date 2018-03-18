@@ -125,3 +125,15 @@ example = [ "..4..57.."
 
 main :: IO ()
 main = mapM_ putStrLn $ head $ solve example
+
+
+-----
+
+innerProd :: [Integer] -> [Integer] -> Integer
+innerProd xs ys = sum $ zipWith (*) xs ys
+
+prodMatrix :: Matrix Integer -> Matrix Integer -> Matrix Integer
+prodMatrix xs ys =
+  [ [ innerProd x z | x <- cols xs]
+  | z <- ys
+  ]
