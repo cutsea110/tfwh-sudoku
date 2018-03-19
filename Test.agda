@@ -57,3 +57,18 @@ _⊗_ : ∀ {n} → Vec ℕ n → Vec ℕ n → ℕ
 
 ex1 : ℕ
 ex1  = (9 ∷ 3 ∷ 7 ∷ 8 ∷ 1 ∷ 2 ∷ 6 ∷ []) ⊗ (1 ∷ 3 ∷ 2 ∷ 4 ∷ 9 ∷ 0 ∷ 8 ∷ [])
+
+data Matrix (A : Set) : (m n : ℕ) → Set where
+  ∣_∣ : A → Matrix A 1 1
+  _⍃_ : ∀ {r c₁ c₂} → Matrix A r c₁ → Matrix A r c₂ → Matrix A r (c₁ + c₂)
+  _⍍_ : ∀ {r₁ r₂ c} → Matrix A r₁ c → Matrix A r₂ c → Matrix A (r₁ + r₂) c
+
+ex2 : Matrix ℕ 2 2
+ex2 = (∣ 1 ∣ ⍃ ∣ 2 ∣)
+             ⍍
+      (∣ 3 ∣ ⍃ ∣ 4 ∣)
+
+ex3 : Matrix ℕ 2 2
+ex3 = (∣ 1 ∣ ⍃ ∣ 0 ∣)
+             ⍍
+      (∣ 0 ∣ ⍃ ∣ 1 ∣)
