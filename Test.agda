@@ -63,12 +63,17 @@ data Matrix (A : Set) : (m n : ℕ) → Set where
   _ː_ : ∀ {r c₁ c₂} → Matrix A r c₁ → Matrix A r c₂ → Matrix A r (c₁ + c₂)
   _∺_ : ∀ {r₁ r₂ c} → Matrix A r₁ c → Matrix A r₂ c → Matrix A (r₁ + r₂) c
 
+
+infixl 4 _∺_
+infixl 5 _ː_
+infix  6 ∣_∣
+
 ex2 : Matrix ℕ 2 2
-ex2 = (∣ 1 ∣ ː ∣ 2 ∣)
-             ∺
-      (∣ 3 ∣ ː ∣ 4 ∣)
+ex2 = ∣ 1 ∣ ː ∣ 2 ∣
+            ∺
+      ∣ 3 ∣ ː ∣ 4 ∣
 
 ex3 : Matrix ℕ 2 2
-ex3 = (∣ 1 ∣ ː ∣ 0 ∣)
-             ∺
-      (∣ 0 ∣ ː ∣ 1 ∣)
+ex3 = ∣ 1 ∣ ː ∣ 0 ∣
+            ∺
+      ∣ 0 ∣ ː ∣ 1 ∣
